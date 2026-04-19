@@ -1,6 +1,5 @@
-package com.verify.newsai.ui.theme
+package com.verify.newsai.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme

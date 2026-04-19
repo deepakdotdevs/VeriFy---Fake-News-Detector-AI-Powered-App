@@ -1,4 +1,4 @@
-package com.verify.newsai.ui.theme
+package com.verify.newsai.theme
 
 import androidx.compose.ui.graphics.Color
 
