@@ -3,24 +3,24 @@ package com.verify.newsai
 import com.verify.newsai.viewmodel.NewsViewModel
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
+import com.verify.newsai.ui.news.NewsFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import androidx.appcompat.app.AppCompatActivity
 
 @AndroidEntryPoint
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
 
 
-    private val viewModel: NewsViewModel by viewModels()
+    // private val viewModel: NewsViewModel by viewModels() -> fragment handles it
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.fetchNews()
+        // viewModel.fetchNews() we have to remove it coz now fragment handles it
         enableEdgeToEdge()
-        setContent {
-
-        }
+        supportFragmentManager.beginTransaction()
+            .replace(android.R.id.content, NewsFragment())
+            .commit()
     }
 }

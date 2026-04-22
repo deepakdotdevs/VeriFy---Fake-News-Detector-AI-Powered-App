@@ -1,8 +1,11 @@
 package com.verify.newsai.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.verify.newsai.data.model.Article
 import com.verify.newsai.data.repository.NewsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -26,6 +29,10 @@ class NewsViewModel @Inject constructor(
 //        }
 //    }
 
+    val _news = MutableLiveData<List<Article>>()
+    val news: LiveData<List<Article>> = _news
+
+
     fun fetchNews() {
         viewModelScope.launch {
 
@@ -34,9 +41,7 @@ class NewsViewModel @Inject constructor(
             val response = repository.getNews(1, "625f0b6194c548ed9381a6d09d6ff0c6")
 
             if (response.isSuccessful) {
-                Log.d("NEWS_DATA", response.body().toString())
-            } else {
-                Log.e("NEWS_ERROR", response.errorBody()?.string() ?: "error")
+                _news.postValue(response.body()?.articles)
             }
         }
     }
